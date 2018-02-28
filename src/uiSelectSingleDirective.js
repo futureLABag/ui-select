@@ -93,11 +93,13 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
 
       element.parent().append(focusser);
       focusser.bind("focus", function(){
+        angular.element(element.parent()[0]).addClass('ui-select-has-focus');
         scope.$evalAsync(function(){
           $select.focus = true;
         });
       });
       focusser.bind("blur", function(){
+        angular.element(element.parent()[0]).removeClass('ui-select-has-focus');
         scope.$evalAsync(function(){
           $select.focus = false;
         });
