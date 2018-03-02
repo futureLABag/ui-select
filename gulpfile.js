@@ -68,7 +68,7 @@ gulp.task('scripts', ['clean'], function() {
     }))
     .pipe(gulp.dest('dist'))
     .pipe($.sourcemaps.init())
-    .pipe($.uglify({preserveComments: 'some'}))
+    .pipe($.uglify())
     .pipe($.concat('select.min.js'))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('dist'));
