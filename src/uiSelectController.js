@@ -535,8 +535,23 @@ uis.controller('uiSelectCtrl',
           if (containerWidth === 0) {
             return false;
           }
-          var inputWidth = containerWidth - input.offsetLeft;
-          if (inputWidth < 50) inputWidth = containerWidth;
+
+          var innerContainerWidth = containerWidth;
+          if (input && input.offsetParent) {
+            // This depends on the div element inside the container.
+            // The offsetParent element may have a padding, which we
+            // have to subtract from the clientWidth too. Luckily the
+            // dom has an empty div element between the offsetParent and
+            // the input element.
+            var firstEl = input.offsetParent.firstElementChild;
+            if (firstEl && firstEl.getBoundingClientRect) {
+                innerContainerWidth = firstEl.getBoundingClientRect().width;
+            }
+          }
+          var inputWidth = innerContainerWidth - input.offsetLeft;
+          // Use full width on new line if input gets too small
+          if (inputWidth < 50) inputWidth = innerContainerWidth;
+
           ctrl.searchInput.css('width', inputWidth+'px');
           return true;
         };
