@@ -522,6 +522,7 @@ uis.controller('uiSelectCtrl',
 
   var sizeWatch = null;
   var updaterScheduled = false;
+  var currentTimeout = null;
   ctrl.sizeSearchInput = function() {
 
     var input = ctrl.searchInput[0],
@@ -541,7 +542,10 @@ uis.controller('uiSelectCtrl',
         };
 
     ctrl.searchInput.css('width', '10px');
-    $timeout(function() { //Give tags time to render correctly
+    if (currentTimeout) {
+        $timeout.cancel(currentTimeout);
+    }
+    currentTimeout = $timeout(function() { //Give tags time to render correctly
       if (sizeWatch === null && !updateIfVisible(calculateContainerWidth())) {
         sizeWatch = $scope.$watch(function() {
           if (!updaterScheduled) {
