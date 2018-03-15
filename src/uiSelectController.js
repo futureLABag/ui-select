@@ -548,6 +548,11 @@ uis.controller('uiSelectCtrl',
                 innerContainerWidth = firstEl.getBoundingClientRect().width;
             }
           }
+          if (innerContainerWidth === 0) {
+            // the inner container may not be rendered or layouted yet
+            return false;
+          }
+
           var inputWidth = innerContainerWidth - input.offsetLeft;
           // Use full width on new line if input gets too small
           if (inputWidth < 50) inputWidth = innerContainerWidth;
