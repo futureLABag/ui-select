@@ -352,3 +352,14 @@ body > .ui-select-bootstrap.open {
 .ui-select-refreshing.ng-animate {
   -webkit-animation: none 0s;
 }
+
+/*
+ * Although this bugreport[1] is closed on github it still does not work.
+ * The workaround described in [2] does fix the layout of ui-select when the page is zoomed.
+ *
+ * [1] https://github.com/angular-ui/ui-select/issues/1575
+ * [2] https://github.com/angular-ui/ui-select/issues/1575#issuecomment-219952489
+*/
+.ui-select-container:not(.ui-select-multiple) input.ui-select-search {
+    width: 100% !important;
+}
